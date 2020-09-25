@@ -1,3 +1,11 @@
+<!-- Load Header -->
+
+<?php
+if ($this->session->userdata('is_logged_in') == true)
+    $this->load->view('website/partials/user/header');
+else
+    $this->load->view('website/partials/common/header');
+?>
 <!-- Hero Section Begin -->
 <section class="hero">
     <div class="hero__slider owl-carousel">
