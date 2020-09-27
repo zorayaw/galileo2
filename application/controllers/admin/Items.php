@@ -24,5 +24,27 @@ class Items extends CI_Controller
         
         $this->load->view('admin/items', $data);
     }
+    
+    public function addStock()
+    {
+        if ($this->session->userdata('admin_is_logged_in') == false) {
+            redirect('admin');
+        }
+
+        $stock_id = $this->input->post('stock_id');
+        $amount = $this->input->post('amount');
+        $admin_id = $this->session->userdata('admin_user_id');
+
+        $updateStock = $this->Items_model->updateStock($stock_id, $amount);
+        $insertStock = $this->Items_model->insertStockIncomeHistory($stock_id, $admin_id, $amount);
+        
+        if($updateStock == true & $insertStock == true){
+            $this->session->set_flashdata('success', 'Stock has been updated Successfully');
+        }
+
+        redirect('admin/Items');
+    }
+
+    
 
 }

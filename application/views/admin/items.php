@@ -6,19 +6,13 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800"><?= $title ?></h1>
-        <nav class="navbar navbar-light bg-light" style="float: right;">
-            <form class="form-inline">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                    <div class="input-group-append">
-                        <button class="btn btn-dark" type="button">Search</button>
-                    </div>
-                </div>
-            </form>
-        </nav>
     </div>
 
-
+    <?php if($this->session->flashdata('success') != null) : ?>
+    <div class="alert alert-success" role="alert">
+        Stock has been updated successfully.
+    </div>
+    <?php endif ?>
     <button class="btn btn-dark mb-4"><i class="fa fa-plus"></i> Add Items</button>
 
     <div class="row">
@@ -182,7 +176,7 @@
                                             </thead>
                                             <tbody>
                                                 <?php $no = 1;
-                                                foreach ($items as $val) : ?>
+                                                foreach ($items as $val2) : ?>
                                                     <tr>
                                                         <!-- <td>
                                 <center><img src="<?= base_url() ?>assets/admin/img/items/<?= $val['item_image'] ?>" style="object-fit: cover; width: 100px; height: 100px; border-radius: 25px; overflow: hidden;" alt="Card image cap">
@@ -192,18 +186,21 @@
                             </td> -->
                                                     <tr>
                                                         <th class="text-center" style="vertical-align: middle;"><?= $no ?></td>
-                                                        <td class="text-center" style="vertical-align: middle;"><?= $val['item_name'] ?></td>
-                                                        <td class="text-center" style="vertical-align: middle;"><?= $val['item_size'] ?></td>
+                                                        <td class="text-center" style="vertical-align: middle;"><?= $val2['item_name'] ?></td>
+                                                        <td class="text-center" style="vertical-align: middle;"><?= $val2['item_size'] ?></td>
                                                     </tr>
                                                     <?php $no++; ?>
                                                 <?php endforeach; ?>
                                             </tbody>
                                         </table>
-                                        <form action="">
+
+                                        
+                                        <form action="<?= base_url() ?>admin/Items/addStock" method="post">
                                             <div class="input-group mb-3 mt-5">
-                                                <input type="number" min="1" class="form-control" placeholder="amount" aria-label="" aria-describedby="basic-addon1">
+                                                <input type="number" min="1" name="amount" class="form-control" placeholder="amount" aria-label="" aria-describedby="basic-addon1">
+                                                <input type="hidden" value="<?= $val['stock_id'] ?>" name="stock_id">
                                                 <div class="input-group-append">
-                                                    <button class="btn btn-outline-primary" type="button"><i class="fa fa-plus mr-2"></i> Add Stock</button>
+                                                    <button type="submit" class="btn btn-outline-primary" type="button"><i class="fa fa-plus mr-2"></i> Add Stock</button>
                                                 </div>
                                             </div>
                                         </form>
