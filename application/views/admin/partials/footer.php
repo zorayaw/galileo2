@@ -55,6 +55,24 @@
   <!-- Page level custom scripts -->
   <script src="<?= base_url()?>assets/admin/js/demo/chart-area-demo.js"></script>
   <script src="<?= base_url()?>assets/admin/js/demo/chart-pie-demo.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
+
+  <script type="text/javascript">
+$.extend( true, $.fn.dataTable.defaults, {
+"searching": true,
+"ordering": true,
+"paging": true
+} );
+$(document).ready(function()
+{
+$('#mese').dataTable( {
+"lengthMenu": [ 5,10,15,20,25,30,35,50,75,100 ],
+"order": [[ 5, "desc" ]],
+"pagingType": "full_numbers"
+} );
+} );
+</script>
+
 
 </body>
 
